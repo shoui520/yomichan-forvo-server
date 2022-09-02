@@ -72,7 +72,7 @@ class Forvo():
         soup = BeautifulSoup(html, features="html.parser")
 
         # Forvo's word page returns multiple result sets grouped by langauge like:
-        # <div id="language-container-ja">
+        # <div id="language-container-zh">
         #   <article>
         #       <ul class="show-all-pronunciations">
         #           <li>
@@ -86,7 +86,7 @@ class Forvo():
         #   <article id="extra-word-info-76">...</article>
         # </ul>
         # We also filter out ads
-        results = soup.select('#language-container-ja>article>ul.pronunciations-list>li:not(.li-ad)')
+        results = soup.select('#language-container-zh>article>ul.pronunciations-list>li:not(.li-ad)')
         audio_sources = []
         for i in results:
             url = self._extract_url(i.div)
@@ -136,7 +136,7 @@ class Forvo():
 
 
 class ForvoHandler(http.server.SimpleHTTPRequestHandler):
-    forvo = Forvo('ja')
+    forvo = Forvo('zh')
 
     # By default, SimpleHTTPRequestHandler logs to stderr
     # This would cause Anki to show an error, even on successful requests
